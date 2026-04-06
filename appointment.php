@@ -1,5 +1,5 @@
 <?php
-include 'config/db.php';
+require_once __DIR__ . '/config/db.php';
 requireLogin();
 
 $message = '';
@@ -11,20 +11,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $appointment_time = mysqli_real_escape_string($conn, $_POST['appointment_time']);
     $patient_id = $_SESSION['patient_id'];
     
-    // Check if already booked for same doctor on same date
-    $check = "SELECT * FROM appointments WHERE patient_id = $patient_id AND doctor_id = $doctor_id AND appointment_date = '$appointment_date'";
-    $check_result = mysqli_query($conn, $check);
-    
-    if(mysqli_num_rows($check_result) > 0) {
-        $error = "You already have an appointment with this doctor on this date!";
+    // Check if time slot is available (prevents double booking)
+    if (!isTimeSlotAvailable($conn, $doctor_id, $appointment_date, $appointment_time)) {
+        $error = "❌ This time slot is already booked! Please select another time or date.";
     } else {
-        $query = "INSERT INTO appointments (patient_id, doctor_id, appointment_date, appointment_time, status) 
-                  VALUES ($patient_id, $doctor_id, '$appointment_date', '$appointment_time', 'pending')";
+        // Check if patient already has appointment with same doctor on same date
+        $check = "SELECT * FROM appointments WHERE patient_id = $patient_id AND doctor_id = $doctor_id AND appointment_date = '$appointment_date'";
+        $check_result = mysqli_query($conn, $check);
         
-        if(mysqli_query($conn, $query)) {
-            $message = "Appointment booked successfully! Status: Pending confirmation.";
+        if(mysqli_num_rows($check_result) > 0) {
+            $error = "You already have an appointment with this doctor on this date!";
         } else {
-            $error = "Error booking appointment: " . mysqli_error($conn);
+            $query = "INSERT INTO appointments (patient_id, doctor_id, appointment_date, appointment_time, status) 
+                      VALUES ($patient_id, $doctor_id, '$appointment_date', '$appointment_time', 'pending')";
+            
+            if(mysqli_query($conn, $query)) {
+                $message = "✅ Appointment booked successfully! Status: Pending confirmation.";
+            } else {
+                if(mysqli_errno($conn) == 1062) {
+                    $error = "❌ This time slot is already booked! Please select another time or date.";
+                } else {
+                    $error = "Error booking appointment: " . mysqli_error($conn);
+                }
+            }
         }
     }
 }
@@ -51,11 +60,11 @@ $dept_result = mysqli_query($conn, $dept_query);
             <li><a href="about.php">About Us</a></li>
             <li><a href="departments.php">Departments</a></li>
             <li><a href="doctors.php">Doctors</a></li>
-            <li><a href="appointment.php">Book Appointment</a></li>
-            <li><a href="my_bookings.php">My Bookings</a></li>
-            <li><a href="scheduled_sessions.php">Scheduled</a></li>
-            <li><a href="settings.php">Settings</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="appointment.php">📅 Book Appointment</a></li>
+            <li><a href="my_bookings.php">📋 My Bookings</a></li>
+            <li><a href="scheduled_sessions.php">✅ Scheduled</a></li>
+            <li><a href="settings.php">⚙️ Settings</a></li>
+            <li><a href="logout.php">🚪 Logout</a></li>
         </ul>
     </nav>
 
@@ -111,12 +120,7 @@ $dept_result = mysqli_query($conn, $dept_query);
             </form>
         </div>
     </div>
-    
-    <script>
-        // Set min date to today
-        document.getElementById('appointment_date').min = new Date().toISOString().split("T")[0];
-    </script>
-    
+
     <footer class="footer">
         <p>&copy; 2026 MediCare - Doctor Appointment System. All rights reserved.</p>
     </footer>

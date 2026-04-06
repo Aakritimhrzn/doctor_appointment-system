@@ -16,14 +16,14 @@
             <li><a href="departments.php">Departments</a></li>
             <li><a href="doctors.php">Doctors</a></li>
             <?php if(isLoggedIn()): ?>
-                <li><a href="appointment.php">Book Appointment</a></li>
-                <li><a href="my_bookings.php">My Bookings</a></li>
-                <li><a href="scheduled_sessions.php">Scheduled</a></li>
-                <li><a href="settings.php">Settings</a></li>
-                <li><a href="logout.php">Logout</a></li>
+                <li><a href="appointment.php">📅 Book Appointment</a></li>
+                <li><a href="my_bookings.php">📋 My Bookings</a></li>
+                <li><a href="scheduled_sessions.php">✅ Scheduled</a></li>
+                <li><a href="settings.php">⚙️ Settings</a></li>
+                <li><a href="logout.php">🚪 Logout</a></li>
             <?php else: ?>
-                <li><a href="login.php">Login</a></li>
-                <li><a href="register.php">Register</a></li>
+                <li><a href="login.php">🔑 Login</a></li>
+                <li><a href="register.php">📝 Register</a></li>
             <?php endif; ?>
         </ul>
     </nav>
@@ -41,7 +41,7 @@
             <br>
             <h3>Why Us?</h3>
             <ul style="margin-left: 2rem;">
-                <li>100+ experienced doctors</li>
+                <li>10+ experienced doctors</li>
                 <li>State-of-the-art facilities</li>
                 <li>24/7 emergency services</li>
                 <li>Affordable treatment plans</li>

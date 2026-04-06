@@ -18,14 +18,14 @@
             <li><a href="departments.php">Departments</a></li>
             <li><a href="doctors.php">Doctors</a></li>
             <?php if(isLoggedIn()): ?>
-                <li><a href="appointment.php">Book Appointment</a></li>
-                <li><a href="my_bookings.php">My Bookings</a></li>
-                <li><a href="scheduled_sessions.php">Scheduled</a></li>
-                <li><a href="settings.php">Settings</a></li>
-                <li><a href="logout.php">Logout (<?php echo getPatientName($conn, $_SESSION['patient_id']); ?>)</a></li>
+                <li><a href="appointment.php">📅 Book Appointment</a></li>
+                <li><a href="my_bookings.php">📋 My Bookings</a></li>
+                <li><a href="scheduled_sessions.php">✅ Scheduled</a></li>
+                <li><a href="settings.php">⚙️ Settings</a></li>
+                <li><a href="logout.php">🚪 Logout (<?php echo getPatientName($conn, $_SESSION['patient_id']); ?>)</a></li>
             <?php else: ?>
-                <li><a href="login.php">Login</a></li>
-                <li><a href="register.php">Register</a></li>
+                <li><a href="login.php">🔑 Login</a></li>
+                <li><a href="register.php">📝 Register</a></li>
             <?php endif; ?>
         </ul>
     </nav>
@@ -72,6 +72,9 @@
 
     <footer class="footer">
         <p>&copy; 2026 MediCare - Doctor Appointment System. All rights reserved.</p>
+        <p style="margin-top: 10px;">
+            <a href="admin/login.php" style="color: white; text-decoration: none; opacity: 0.7;">👑 Admin Login</a>
+        </p>
     </footer>
 </body>
 </html>

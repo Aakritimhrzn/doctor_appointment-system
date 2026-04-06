@@ -1,5 +1,5 @@
 <?php
-include 'config/db.php';
+require_once __DIR__ . '/config/db.php';
 
 if(isset($_GET['department_id'])) {
     $dept_id = intval($_GET['department_id']);

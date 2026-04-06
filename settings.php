@@ -51,11 +51,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             <li><a href="about.php">About Us</a></li>
             <li><a href="departments.php">Departments</a></li>
             <li><a href="doctors.php">Doctors</a></li>
-            <li><a href="appointment.php">Book Appointment</a></li>
-            <li><a href="my_bookings.php">My Bookings</a></li>
-            <li><a href="scheduled_sessions.php">Scheduled</a></li>
-            <li><a href="settings.php">Settings</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="appointment.php">📅 Book Appointment</a></li>
+            <li><a href="my_bookings.php">📋 My Bookings</a></li>
+            <li><a href="scheduled_sessions.php">✅ Scheduled</a></li>
+            <li><a href="settings.php">⚙️ Settings</a></li>
+            <li><a href="logout.php">🚪 Logout</a></li>
         </ul>
     </nav>
 

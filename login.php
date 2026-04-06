@@ -48,8 +48,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             <li><a href="about.php">About Us</a></li>
             <li><a href="departments.php">Departments</a></li>
             <li><a href="doctors.php">Doctors</a></li>
-            <li><a href="login.php">Login</a></li>
-            <li><a href="register.php">Register</a></li>
+            <li><a href="login.php">🔑 Login</a></li>
+            <li><a href="register.php">📝 Register</a></li>
         </ul>
     </nav>
 
@@ -77,6 +77,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             
             <p style="text-align: center; margin-top: 1rem;">
                 Don't have an account? <a href="register.php">Register here</a>
+            </p>
+            <p style="text-align: center; margin-top: 0.5rem;">
+                <a href="admin/login.php">🔐 Admin Panel Login</a>
             </p>
         </div>
     </div>
